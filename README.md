@@ -1,8 +1,8 @@
 Nice Views IL
 =============
 
-Nice ViewsIL is a mobile web app that is built around instagram API.
-It's a mobile first web app that should bring you interesting photos 
+Nice ViewsIL is a mobile web app that is built around Instagram API.
+It's a mobile first web app that bring you *interesting* photos 
 the you didn't follow on your private account.
 
 * Live version: http://NiceViews-il.appspot.com/
