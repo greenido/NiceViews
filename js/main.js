@@ -16,6 +16,9 @@ function fetchFeed(curFeed, curSource) {
   $.ajax({
   url : document.location.protocol + curFeed,
   dataType : 'json',
+  error: function(err) {
+    console.error("Could not fetch feed: " + curFeed + " Err: " + JSON.stringify(err));
+  },
   success  : function (data) {
     // check if we got something to work on.
     if (data && data.data ) {
@@ -26,40 +29,44 @@ function fetchFeed(curFeed, curSource) {
         var when = entry.created_time;
        
         when += " (" + curSource + ")";
-        // console.log("-----------" + when + "-------------");
-        // console.log("title      : " + entry.title);
+        console.log("-----------" + when + "-------------");
+        console.log("title      : " + entry.title);
+        
         var buttonHTML = "";
         if (entry.caption && entry.caption.text) {
-          buttonHTML = '<div class="row">' + 
-          '<div class="large-12 columns">' + entry.caption.text + '</div>' +
-          '<div class="small-8 small-centered columns round secondary"><span class="smallfont">' + when +
-          '</span></div></div>';  
+          var picText = entry.caption.text;
+          if (picText.length > 300) {
+            picText = picText.substring(0,300) + "...";
+          }
         }
-        
-        // if ((curIndex % 2) === 0) {
-        //   mainList += '<div class="row">'; 
-        // }
-        
-        mainList +=  '<div class="large-12 columns">' + 
-                      '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/>' +
-                      '<a href="' + 
-                      entry.link + '" target="_blank" class="medium round button">' + 
-                      buttonHTML + '</a></div>';
-        // if (curIndex %2 === 0) {
-        //   mainList += "</div>";  
-        // }
+         
+        var geoMap = ""  
+        if ( entry.location &&  entry.location.latitude &&  entry.location.longitude ) {
+          geoMap = //'<div class="large-6 large-centered columns">' + 
+                    '<img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center=' +
+                    entry.location.latitude + ',' + entry.location.longitude +
+                    '&amp;zoom=8&amp;size=200x200" class="quimby_search_image">' ;
+                    //'</div>';
+        }  
 
+        mainList += '<div class="large-6 large-centered columns">' + 
+                      '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
+                      '</div>' + 
+                      '<div class="large-3 large-centered columns">' + 
+                      '<a href="' + entry.link + '" target="_blank" class="button">' + 
+                      picText + '<br>' + geoMap + '</a>' + 
+                    ' </div>';
         curIndex++;
       });
 
       if (curSource.indexOf("Top") > -1) {
         $('#mainlist').html("");
+        $('#mainlist').append(mainList);
+      } else if (curSource.indexOf("Models") > -1) {
+        $('#models').html("");
+        $('#models').html(mainList);
       }
-      $('#mainlist').append(mainList);
-      
-      // if (curSource.indexOf("10") > 1) {
-      //   $('#c10').html(mainList);
-      // }
+
       // if (curSource.indexOf("Ynet") > -1) {
       //   $('#c-ynet').html(mainList);
       // }
@@ -71,6 +78,26 @@ function fetchFeed(curFeed, curSource) {
 });
 }
 
+function picAround() {
+  if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(fetchPosition);
+  } else {
+     console.warn("Cannot get the Geo location :(" );
+  }
+}
+
+//
+function fetchPosition(position) {
+    console.log("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude); 
+    var geoImgFeed = "proxy.php?url=https://api.instagram.com/v1/media/search?client_id=218ce81fd3aa49188e4b643556a79559" +
+            "lat=" + position.coords.latitude  + 
+            "long=" + position.coords.longitude+
+            "&callback=success";
+  
+
+  fetchFeed(geoImgFeed, "Around");
+}
+
 //
 //
 //
@@ -80,12 +107,18 @@ function fetchAllFeeds() {
   var top = "proxy.php?url=https://api.instagram.com/v1/media/popular?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
   fetchFeed(top, "Top");
   
+
+  var models = "proxy.php?url=https://api.instagram.com/v1/barrefaeli/3/media/recent/?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
+  fetchFeed(models, "Models");
+
+  //picAround();
+  
 }
 
 // First fetch of all the feeds to the page
 fetchAllFeeds();
-// fetch new data every 60sec
-setInterval(fetchAllFeeds, 60000);
+// fetch new data every 120sec
+setInterval(fetchAllFeeds, 120000);
 
 //
 // A nice little clock
