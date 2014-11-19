@@ -3,6 +3,8 @@
  * Enable us to fetch pictures from twitter
  *
  * @author Ido Green | @greenido
+ * @see https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+ *
  */
 
 /* Load Twitter lib files for the OAUTH */
@@ -25,11 +27,3 @@ catch (Exception $exc) {
   error_log("Could not fetch tweets :( ERR: " . $exc->getTraceAsString());  
   echo ('[{"ERR":"Could not fetch tweets: "' . $exc->getMessage() . '}]');
 }
-
-/*
-$userData = $connection->get('users/show', array('screen_name' => 'greenido'));
-//echo $userData;
-echo "<h2>User</h2>";
-print_r(json_encode($userData));
-//var_dump($userData);
-*/
