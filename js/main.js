@@ -13,69 +13,98 @@ $(document).foundation();
 // https://api.instagram.com/v1/tags/coffee/media/recent?access_token=fb2e77d.47a0479900504cb3ab4a1f626d174d2d&callback=callbackFunction
 //
 function fetchFeed(curFeed, curSource) {
-  $.ajax({
-  url : document.location.protocol + curFeed,
-  dataType : 'json',
-  error: function(err) {
-    console.error("Could not fetch feed: " + curFeed + " Err: " + JSON.stringify(err));
-  },
-  success  : function (data) {
-    // check if we got something to work on.
-    if (data && data.data ) {
-      
-      var curIndex = 1;
-      var mainList = '';
-      $.each(data.data, function (i, entry) {
-        var when = entry.created_time;
-       
-        when += " (" + curSource + ")";
-        console.log("-----------" + when + "-------------");
-        console.log("title      : " + entry.title);
+    $.ajax({
+    url : document.location.protocol + curFeed,
+    dataType : 'json',
+    error: function(err) {
+      console.error("Could not fetch feed: " + curFeed + " Err: " + JSON.stringify(err));
+    },
+    success  : function (data) {
+      // Check if we got something to work on.
+      if (data && data.data ) {
         
-        var buttonHTML = "";
-        if (entry.caption && entry.caption.text) {
-          var picText = entry.caption.text;
-          if (picText.length > 300) {
-            picText = picText.substring(0,300) + "...";
+        var curIndex = 1;
+        var mainList = '';
+        $.each(data.data, function (i, entry) {
+          var when = entry.created_time;
+          when += " (" + curSource + ")";
+          console.log("-----------" + when + "-------------");
+          var buttonHTML = "";
+          if (entry.caption && entry.caption.text) {
+            var picText = entry.caption.text;
+            if (picText.length > 300) {
+              picText = picText.substring(0,300) + "...";
+            }
           }
+           
+          var geoMap = ""  
+          if ( entry.location &&  entry.location.latitude &&  entry.location.longitude ) {
+            geoMap = //'<div class="large-6 large-centered columns">' + 
+                      '<img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center=' +
+                      entry.location.latitude + ',' + entry.location.longitude +
+                      '&amp;zoom=8&amp;size=200x200" class="quimby_search_image">' ;
+                      //'</div>';
+          }  
+
+          mainList += '<div class="large-6 large-centered columns">' + 
+                        '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
+                        '</div>' + 
+                        '<div class="large-3 large-centered columns">' + 
+                        '<a href="' + entry.link + '" target="_blank" class="button">' + 
+                        picText + '<br>' + geoMap + '</a>' + 
+                      ' </div>';
+          curIndex++;
+        });
+
+        if (curSource.indexOf("Top") > -1) {
+          $('#mainlist').html("");
+          $('#mainlist').append(mainList);
+        } else if (curSource.indexOf("Models") > -1) {
+          $('#models').html("");
+          $('#models').html(mainList);
         }
+
+      }
+    }
+  });
+}
+
+function fetchTweets() {
+ $.ajax({
+    url : "tweet-pics.php",
+    dataType : 'json',
+    error: function(err) {
+      console.error("Could not fetch tweets. Err: " + JSON.stringify(err));
+    },
+    success  : function (data) {
+      // Check if we got something to work on.
+      if (data) {
+        var mainList = '';
+        $.each(data, function (i, entry) {
+          if (entry.entities && entry.entities.media) {
+            var when = entry.created_at;
          
-        var geoMap = ""  
-        if ( entry.location &&  entry.location.latitude &&  entry.location.longitude ) {
-          geoMap = //'<div class="large-6 large-centered columns">' + 
-                    '<img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center=' +
-                    entry.location.latitude + ',' + entry.location.longitude +
-                    '&amp;zoom=8&amp;size=200x200" class="quimby_search_image">' ;
-                    //'</div>';
-        }  
+          console.log("-----------" + when + "-------------");
+          console.log("title      : " + entry.text);
+          mainList += '<div class="large-6 large-centered columns">' + 
+              '<img src="' + entry.entities.media[0].media_url + '" /> ' +
+              '</div>' + 
+              '<div class="large-3 large-centered columns">' + 
+              '<a href="' + entry.entities.media.expanded_url +
+              '" target="_blank" class="button">'+ entry.text +'</a>' + 
+              '<br> ' + when + 
+              ' </div>';
+          }
+          
+        });
 
-        mainList += '<div class="large-6 large-centered columns">' + 
-                      '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
-                      '</div>' + 
-                      '<div class="large-3 large-centered columns">' + 
-                      '<a href="' + entry.link + '" target="_blank" class="button">' + 
-                      picText + '<br>' + geoMap + '</a>' + 
-                    ' </div>';
-        curIndex++;
-      });
-
-      if (curSource.indexOf("Top") > -1) {
-        $('#mainlist').html("");
-        $('#mainlist').append(mainList);
-      } else if (curSource.indexOf("Models") > -1) {
+        
         $('#models').html("");
         $('#models').html(mainList);
+      
       }
-
-      // if (curSource.indexOf("Ynet") > -1) {
-      //   $('#c-ynet').html(mainList);
-      // }
-      // if (curSource.indexOf("2") > -1) {
-      //   $('#c-mako').html(mainList);
-      // }
     }
-  }
-});
+  });
 }
 
 function picAround() {
@@ -107,9 +136,7 @@ function fetchAllFeeds() {
   var top = "proxy.php?url=https://api.instagram.com/v1/media/popular?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
   fetchFeed(top, "Top");
   
-
-  var models = "proxy.php?url=https://api.instagram.com/v1/barrefaeli/3/media/recent/?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
-  fetchFeed(models, "Models");
+  fetchTweets();
 
   //picAround();
   
