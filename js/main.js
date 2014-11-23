@@ -1,6 +1,6 @@
 //
 // Main code of our app.
-// 1. Simple fetching of images from insta api
+// 1. Simple fetching of images from Instagram API
 //
 // @author: Ido Green | @greenido
 // Date: Nov 2014
@@ -10,7 +10,7 @@ $(document).foundation();
 
 
 //
-// https://api.instagram.com/v1/tags/coffee/media/recent?access_token=fb2e77d.47a0479900504cb3ab4a1f626d174d2d&callback=callbackFunction
+// Fetch the popular images from insta
 //
 function fetchFeed(curFeed, curSource) {
     $.ajax({
@@ -21,8 +21,7 @@ function fetchFeed(curFeed, curSource) {
     },
     success  : function (data) {
       // Check if we got something to work on.
-      if (data && data.data ) {
-        
+      if (data && data.data ) {        
         var curIndex = 1;
         var mainList = '';
         $.each(data.data, function (i, entry) {
@@ -37,7 +36,8 @@ function fetchFeed(curFeed, curSource) {
             }
           }
            
-          var geoMap = ""  
+          var geoMap = "";
+          // If we have geo location - let's have a nice little map ;)
           if ( entry.location &&  entry.location.latitude &&  entry.location.longitude ) {
             geoMap = //'<div class="large-6 large-centered columns">' + 
                       '<img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center=' +
@@ -45,8 +45,8 @@ function fetchFeed(curFeed, curSource) {
                       '&amp;zoom=8&amp;size=200x200" class="quimby_search_image">' ;
                       //'</div>';
           }  
-
-          mainList += '<div class="large-6 large-centered columns">' + 
+          // Add the image to our page
+          mainList += '<div class="large-6 large-centered columns">' +   
                         '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
                         '</div>' + 
                         '<div class="large-3 large-centered columns">' + 
@@ -56,19 +56,24 @@ function fetchFeed(curFeed, curSource) {
           curIndex++;
         });
 
-        if (curSource.indexOf("Top") > -1) {
-          $('#mainlist').html("");
-          $('#mainlist').append(mainList);
-        } else if (curSource.indexOf("Models") > -1) {
-          $('#models').html("");
-          $('#models').html(mainList);
-        }
+        // if (curSource.indexOf("Top") > -1) {
+        $('#mainlist').html("");
+        $('#mainlist').append(mainList);
+
+        // } 
+        // else if (curSource.indexOf("Models") > -1) {
+        //   $('#models').html("");
+        //   $('#models').html(mainList);
+        // }
 
       }
     }
   });
 }
 
+//
+// Fetch tweets - hopefully with cool images
+//
 function fetchTweets() {
  $.ajax({
     url : "tweet-pics.php",
