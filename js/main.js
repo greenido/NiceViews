@@ -99,10 +99,8 @@ function fetchTweets() {
               '" target="_blank" class="button">'+ entry.text +'</a>' + 
               '<br> ' + when + 
               ' </div>';
-          }
-          
+          } 
         });
-
         
         $('#models').html("");
         $('#models').html(mainList);
@@ -142,13 +140,12 @@ function fetchAllFeeds() {
   fetchFeed(top, "Top");
   
   fetchTweets();
-
-  //picAround();
   
 }
 
 // First fetch of all the feeds to the page
 fetchAllFeeds();
+
 // fetch new data every 120sec
 setInterval(fetchAllFeeds, 120000);
 
