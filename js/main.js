@@ -133,7 +133,7 @@ function fetchPosition(position) {
 }
 
 function displayMsgWhileWaiting(idElem) {
-    var secs = 6;
+    var secs = 10;
     var msgArray = ["No great artist ever sees things as they really are. If he did, he would cease to be an artist.",
         "True friends stab you in the front.",
         "I have the simplest tastes. I am always satisfied with the best.",
@@ -146,7 +146,7 @@ function displayMsgWhileWaiting(idElem) {
     var randInx = Math.floor(Math.random() * msgArray.length);
     $(idElem).html('<p> <center> <img src="img/ajax-loader.gif" /> </center> </p> <h4>' + msgArray[randInx] +'</h4>');
     timer = setInterval(function () {
-        if (secs == 1) {
+        if (secs < 1) {
             clearTimeout(timer);
             return;
         }
@@ -154,7 +154,7 @@ function displayMsgWhileWaiting(idElem) {
         var randInx = Math.floor(Math.random() * msgArray.length);
         $(idElem).html('<p> <center> <img src="img/ajax-loader.gif" /> </center> </p> <h4>' + msgArray[randInx] +'</h4>');
         
-    }, 1000);
+    }, 2500);
 }
 //
 //

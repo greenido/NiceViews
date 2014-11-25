@@ -17,12 +17,14 @@
       padding-left: 1.6em;
     }
     
-      span.smallfont {
-        font-size: 80%;
-        padding: 0.4em;
-        border-radius: 30%;
-      }
-
+    span.smallfont {
+      font-size: 80%;
+      padding: 0.4em;
+      border-radius: 30%;
+    }
+    h3 {
+      text-align: center;
+    }
     
     </style>
 
@@ -49,10 +51,11 @@
 
       <section class="top-bar-section">
         <!--  Nav Section -->
-        <ul class=" tabs" data-tab>
+        <ul class=" tabs" data-tab >
           <li>
             <a href="#panel2">Nature</a>
           </li>
+
           <li>
             <a href="#panel1">InstaTop</a>
           </li>
@@ -74,7 +77,7 @@
       <div class="large-10 columns large-centered callout panel" id="models"></div>
     </div>
 
-    <div class="content " id="panel1">
+    <div class="content" id="panel1">
       <h3>Top</h3>
       <div class="large-10 columns large-centered callout panel" id="mainlist"></div>
 
@@ -89,7 +92,32 @@
     <div class="content" id="setting">
       <div class="row">
         <div class="panel callout radius">
-          <form>todo</form>
+          <form id='setform'>
+            
+            <div class="row collapse">
+              <h3>Twitter User</h3>
+              <div class="large-8 columns" id="t-users">
+                  
+              </div>
+
+              <div class="small-8 columns">
+                  <a href="#" id="addbut" class="button round">Add</a>
+              </div>
+
+              <hr>
+              <div class="large-12 columns" id="t-users">
+                <div class="small-3 columns">
+                  <a href="#" id="saveset" class="button round alert">Save</a>
+                </div>
+                <div class="small-3 columns">
+                  <a  href="#" id="cancelset" class="button round">Cancel</a>
+                </div>
+              </div>
+
+            </div>
+
+            
+          </form>
         </div>
       </div>
     </div>
