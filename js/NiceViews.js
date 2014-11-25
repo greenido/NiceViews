@@ -10,7 +10,8 @@ function unixTimeToReadable(unix_timestamp) {
   
   var hours = date.getHours();
   var minutes = date.getMinutes();
-  if (minutes < 10) {
+  if (minutes
+< 10) {
     minutes = "0" + minutes;
   }
 
@@ -28,12 +29,12 @@ function unixTimeToReadable(unix_timestamp) {
 }
 
 //
-// Start the party
+// All the functions we have in the setting dialog:
+// 1. Read setting on load time. 
+// 2. Save setting to local Storage
 //
-$(function() {
-  console.log("-- Starting the party")
-  
-  // update the setting tab
+function settingTab() {
+  // update the setting tab with info from localStorage
   var tUsers = 0;
   if (localStorage.getItem("t-users") > 0) {
     tUsers = localStorage.getItem("t-users");  
@@ -44,15 +45,17 @@ $(function() {
       localStorage.getItem("twitter" + j) + '></div>');  
   };
 
-
+  // Add twitter user button
   $("#addbut").click(function() {
     $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. @greenido" /></div>');
   })
 
+  // Cancel button - just show the first panel 
   $("#cancelset").click(function() {
     $("#panel1").addClass("active");
   });
 
+  // Save action
   $("#saveset").click(function() {
     // save to localStorage
     console.log('-- saving to local storage all the settings --');
@@ -62,13 +65,19 @@ $(function() {
       localStorage.setItem("twitter" + i, input.val());
       i++;
     });
-
+    // So will keep track on how many users we are fetching
     localStorage.setItem("t-users", (i-1));
-
     $("#panel2").addClass("active");
   });
+}
+
+//
+// Start the party
+//
+$(function() {
+  console.log("-- Starting the party")
+  
+  settingTab();
 
 
 });
-            
-
