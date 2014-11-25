@@ -41,8 +41,10 @@ function settingTab() {
   }
   tUsers++;
   for (var j = 1; j < tUsers; j++) {
-    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. @greenido" value='+ 
-      localStorage.getItem("twitter" + j) + '></div>');  
+    var tUserName = localStorage.getItem("twitter" + j);
+    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. @greenido" value=' + 
+       tUserName + '></div>'); 
+    fetchTweetAccount(tUserName); 
   };
 
   // Add twitter user button
@@ -76,7 +78,8 @@ function settingTab() {
 //
 $(function() {
   console.log("-- Starting the party")
-  
+
+    
   settingTab();
 
 

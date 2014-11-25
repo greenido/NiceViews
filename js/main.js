@@ -27,7 +27,7 @@ function fetchFeed(curFeed, curSource) {
         $.each(data.data, function (i, entry) {
           var when = entry.created_time;
           when += " (" + curSource + ")";
-          console.log("-----------" + when + "-------------");
+          // console.log("-----------" + when + "-------------");
           var buttonHTML = "";
           if (entry.caption && entry.caption.text) {
             var picText = entry.caption.text;
@@ -72,6 +72,31 @@ function fetchFeed(curFeed, curSource) {
 }
 
 //
+// We could use something like that, when the images are on our server:
+// var image = new Image();
+// image.addEventListener("load", function(e) {
+//   var imgData = getBase64Image(image);
+//   localStorage.setItem("t_img" + i, imgData);
+// });
+// image.src = entry.entities.media[0].media_url;  
+//
+function getBase64Image(img) {
+  // Create an empty canvas element
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  // Copy the image contents to the canvas
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  // Get the data-URL formatted image
+  // original format, but be aware the using "image/jpg" will re-encode the image.
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+//
 // Fetch tweets - hopefully with cool images
 //
 function fetchTweets() {
@@ -89,17 +114,18 @@ function fetchTweets() {
           if (entry.entities && entry.entities.media) {
             var when = entry.created_at;
          
-          //console.log("-----------" + when + "-------------");
-          //console.log("title      : " + entry.text);
-          when = when.substring(0,10);
-          var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
-          mainList += '<div class="large-6 large-centered columns">' + 
+            //console.log("-----------" + when + "-------------");
+            //console.log("title      : " + entry.text);
+            when = when.substring(0,10);
+            var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
+            mainList += '<div class="large-6 large-centered columns">' + 
               '<img src="' + entry.entities.media[0].media_url + '" height="640" width="640"/> ' +
               '</div>' + 
               '<div class="large-3 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
               ' </div>';
+
           } 
         });
         clearTimeout(timer);
@@ -111,6 +137,46 @@ function fetchTweets() {
   });
 }
 
+//
+// Fetch tweets per account
+//
+function fetchTweetAccount(tUserName) {
+ $.ajax({
+    url : "tweetsPerAccount.php?user=" + tUserName,
+    dataType : 'json',
+    error: function(err) {
+      console.error("Could not fetch tweets. Err: " + JSON.stringify(err));
+    },
+    success  : function (data) {
+      // Check if we got something to work on.
+      if (data) {
+        var mainList = '';
+        $.each(data, function (i, entry) {
+          if (entry.entities && entry.entities.media) {
+            var when = entry.created_at;
+         
+            //console.log("-----------" + when + "-------------");
+            //console.log("title      : " + entry.text);
+            when = when.substring(0,10);
+            var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
+            mainList += '<div class="large-6 large-centered columns">' + 
+              '<img src="' + entry.entities.media[0].media_url + '" alt="Views App: ' + imgTitle + '"/>' + 
+              '</div>' + 
+              '<div class="large-3 large-centered columns">' + 
+              '<a href="' + entry.entities.media[0].expanded_url +
+              '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
+              ' </div>';
+
+          } 
+        });
+        $('#custom').append(mainList);
+      
+      }
+    }
+  });
+}
+
+//
 function picAround() {
   if (navigator.geolocation) {
         navigator.geolocation.watchPosition(fetchPosition);
