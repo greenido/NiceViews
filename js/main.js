@@ -90,15 +90,16 @@ function fetchTweets() {
           if (entry.entities && entry.entities.media) {
             var when = entry.created_at;
          
-          console.log("-----------" + when + "-------------");
-          console.log("title      : " + entry.text);
+          //console.log("-----------" + when + "-------------");
+          //console.log("title      : " + entry.text);
+          when = when.substring(0,10);
+          var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
           mainList += '<div class="large-6 large-centered columns">' + 
               '<img src="' + entry.entities.media[0].media_url + '" height="640" width="640"/> ' +
               '</div>' + 
               '<div class="large-3 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
-              '" target="_blank" class="button">'+ entry.text +'</a>' + 
-              '<br> ' + when + 
+              '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
               ' </div>';
           } 
         });
