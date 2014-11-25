@@ -6,6 +6,9 @@ It's a mobile first web app that bring you *interesting* photos
 the you didn't follow on your private account.
 
 ### TODO
+* Break the server side API to enable the client to drive the feeds.
+* Use localStorage/IndexedDB to save the last photos.
+* 
 * Add Live version at: http://NiceViews-il.appspot.com
 * Add post with explanations at: http://greenido.wordpress.com
 
