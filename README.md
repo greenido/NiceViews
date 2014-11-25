@@ -25,8 +25,8 @@ Features
 * Allow integration with FB, yelp, G+ --> to help tune the profile.  
 
 * APIs 
-  * ![Instagram API](http://instagram.com/developer/endpoints/)
-  * ![Twitter API](https://dev.twitter.com/)
+  * [Instagram API](http://instagram.com/developer/endpoints/)
+  * [Twitter API](https://dev.twitter.com/)
 
 ####Please feel free to fork or open issues.
 
