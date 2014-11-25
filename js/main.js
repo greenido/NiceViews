@@ -57,6 +57,7 @@ function fetchFeed(curFeed, curSource) {
         });
 
         // if (curSource.indexOf("Top") > -1) {
+        
         $('#mainlist').html("");
         $('#mainlist').append(mainList);
 
@@ -101,7 +102,7 @@ function fetchTweets() {
               ' </div>';
           } 
         });
-        
+        clearTimeout(timer);
         $('#models').html("");
         $('#models').html(mainList);
       
@@ -130,17 +131,42 @@ function fetchPosition(position) {
   fetchFeed(geoImgFeed, "Around");
 }
 
+function displayMsgWhileWaiting(idElem) {
+    var secs = 6;
+    var msgArray = ["No great artist ever sees things as they really are. If he did, he would cease to be an artist.",
+        "True friends stab you in the front.",
+        "I have the simplest tastes. I am always satisfied with the best.",
+        "Some cause happiness wherever they go; others whenever they go",
+        "Children begin by loving their parents; after a time they judge them; rarely, if ever, do they forgive them.",
+        "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
+        "Try to be a rainbow in someone's cloud.",
+        "Put your heart, mind, and soul into even your smallest acts. This is the secret of success."
+    ];
+    var randInx = Math.floor(Math.random() * msgArray.length);
+    $(idElem).html('<p> <center> <img src="img/ajax-loader.gif" /> </center> </p> <h4>' + msgArray[randInx] +'</h4>');
+    timer = setInterval(function () {
+        if (secs == 1) {
+            clearTimeout(timer);
+            return;
+        }
+        secs--;
+        var randInx = Math.floor(Math.random() * msgArray.length);
+        $(idElem).html('<p> <center> <img src="img/ajax-loader.gif" /> </center> </p> <h4>' + msgArray[randInx] +'</h4>');
+        
+    }, 1000);
+}
 //
 //
 //
 function fetchAllFeeds() {
+  
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
-  $('#mainlist10').html("<p><img src='img/ajax-loader.gif' /></p>");
   var top = "proxy.php?url=https://api.instagram.com/v1/media/popular?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
   fetchFeed(top, "Top");
-  
+
+  displayMsgWhileWaiting('#models');
+  // $('#models').html("<p><img src='img/ajax-loader.gif' /></p>");
   fetchTweets();
-  
 }
 
 // First fetch of all the feeds to the page
@@ -149,34 +175,3 @@ fetchAllFeeds();
 // fetch new data every 120sec
 setInterval(fetchAllFeeds, 120000);
 
-//
-// A nice little clock
-//
-function updateClock() {
-  // Gets the current time
-  var now = new Date();
-
-  // Get the hours, minutes and seconds from the current time
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
-
-  // Format hours, minutes and seconds
-  if (hours < 10) {
-      hours = "0" + hours;
-  }
-  if (minutes < 10) {
-      minutes = "0" + minutes;
-  }
-  if (seconds < 10) {
-      seconds = "0" + seconds;
-  }
-
-  // Gets the element we want to inject the clock into
-  var elem = document.getElementById('clock');
-
-  // Sets the elements inner HTML value to our clock data
-  elem.innerHTML = hours + ':' + minutes + ':' + seconds;
-
-}
-setInterval('updateClock()', 500);
