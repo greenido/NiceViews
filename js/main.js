@@ -13,6 +13,7 @@ $(document).foundation();
 // Fetch the popular images from insta
 //
 function fetchFeed(curFeed, curSource) {
+    $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
     $.ajax({
     url : document.location.protocol + curFeed,
     dataType : 'json',
@@ -21,7 +22,8 @@ function fetchFeed(curFeed, curSource) {
     },
     success  : function (data) {
       // Check if we got something to work on.
-      if (data && data.data ) {        
+      if (data && data.data ) {    
+        $("#spinner").hide();    
         var curIndex = 1;
         var mainList = '';
         $.each(data.data, function (i, entry) {
@@ -55,17 +57,8 @@ function fetchFeed(curFeed, curSource) {
           curIndex++;
         });
 
-        // if (curSource.indexOf("Top") > -1) {
-        
-        $('#mainlist').html("");
+        //$('#mainlist').html("");
         $('#mainlist').append(mainList);
-
-        // } 
-        // else if (curSource.indexOf("Models") > -1) {
-        //   $('#models').html("");
-        //   $('#models').html(mainList);
-        // }
-
       }
     }
   });
@@ -129,7 +122,7 @@ function fetchTweets() {
           } 
         });
         clearTimeout(timer);
-        $('#models').html("");
+        //$('#models').html("");
         $('#models').html(mainList);
       
       }
@@ -225,8 +218,6 @@ function displayMsgWhileWaiting(idElem) {
 //
 //
 function fetchAllFeeds() {
-  
-  $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   var top = "proxy.php?url=https://api.instagram.com/v1/media/popular?client_id=218ce81fd3aa49188e4b643556a79559&callback=success";
   fetchFeed(top, "Top");
 
