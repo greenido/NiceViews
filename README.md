@@ -7,12 +7,11 @@ the you didn't follow on your private account.
 
 ### TODO
 * Break the server side API to enable the client to drive the feeds.
-* Use localStorage/IndexedDB to save the last photos.
-* 
-* Add Live version at: http://NiceViews-il.appspot.com
+* Use localStorage/IndexedDB to save the last photos + proxy the photos.
+* Add Live version at: http://NiceViews.appspot.com
 * Add post with explanations at: http://greenido.wordpress.com
 
-![](http://greenido.files.wordpress.com/2014/07/screenshot-2014-07-09-16-28-35.png?w=247&h=300)
+![](http://ido-green.appspot.com/imgs/someone-busy-is-running.png)
 
 Main Goal
 =========
