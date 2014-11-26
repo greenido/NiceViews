@@ -6,7 +6,7 @@ It's a mobile first web app that bring you *interesting* photos
 the you didn't follow on your private account.
 
 ### Demo
-Live version at: http://views2remember.appspot.com/#
+Live version at: http://views2remember.appspot.com/
 
 ### TODO
 * Break the server side API to enable the client to drive the feeds.
