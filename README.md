@@ -5,10 +5,12 @@ Nice ViewsIL is a mobile web app that is built around Instagram API.
 It's a mobile first web app that bring you *interesting* photos 
 the you didn't follow on your private account.
 
+### Demo
+Live version at: http://views2remember.appspot.com/#
+
 ### TODO
 * Break the server side API to enable the client to drive the feeds.
 * Use localStorage/IndexedDB to save the last photos + proxy the photos.
-* Add Live version at: http://NiceViews.appspot.com
 * Add post with explanations at: http://greenido.wordpress.com
 
 ![](http://ido-green.appspot.com/imgs/someone-busy-is-running.png)

@@ -36,6 +36,7 @@ function settingTab() {
     tUsers = localStorage.getItem("t-users");  
   }
   tUsers++;
+  var noCustom = true;
   for (var j = 1; j < tUsers; j++) {
     var tUserName = localStorage.getItem("twitter" + j);
     if (tUserName === null || tUserName === undefined) {
@@ -45,8 +46,13 @@ function settingTab() {
        tUserName + '></div>'); 
     if (tUserName.length > 2) {
       fetchTweetAccount(tUserName); 
+      noCustom = false;
     }
-  };
+  }
+
+  if (noCustom) {
+    $("#custom").html(' <i class="fi-photo size-48 style3"></i><h5>Checkout the <i>Settings</i> tab to customize this view!</h5>');
+  }
 
   // Add twitter user button
   $("#addbut").click(function() {
@@ -76,6 +82,7 @@ function settingTab() {
     // So will keep track on how many users we are fetching
     localStorage.setItem("t-users", (i-1));
     $("#panel2").addClass("active");
+    location.reload();
   });
 }
 

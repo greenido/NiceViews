@@ -40,11 +40,12 @@ function fetchFeed(curFeed, curSource) {
            
           // Add the image to our page
           mainList += '<div class="large-6 large-centered columns">' +   
-                        '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
-                        '</div>' + 
-                        '<div class="large-6 large-centered columns">' + 
-                        '<a href="' + entry.link + '" target="_blank" class="button">' + 
-                        picText + '<br></a> </div>';
+              '<img src="' + entry.images.standard_resolution.url +
+              '" height="640" width="640" alt="From http://views2remember.appspot.com/"/>' +
+              '</div>' + 
+              '<div class="large-6 large-centered columns">' + 
+              '<a href="' + entry.link + '" target="_blank" class="button">' + 
+              picText + '<br></a> </div>';
           curIndex++;
         });
 
@@ -103,7 +104,8 @@ function fetchTweets() {
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
             mainList +=  '<div class="large-6 large-centered columns">' + 
-              '<img src="' + entry.entities.media[0].media_url + '" height="640" width="640"/> ' +
+              '<img src="' + entry.entities.media[0].media_url + 
+              '" height="640" width="640" alt="From http://views2remember.appspot.com/ - ' + imgTitle + '"/> ' +
               '</div>' + 
               '<div class="large-6 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
@@ -144,7 +146,8 @@ function fetchTweetAccount(tUserName) {
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
             mainList += '<div class="large-6 large-centered columns">' + 
-              '<img src="' + entry.entities.media[0].media_url + '" alt="Views App: ' + imgTitle + '"/>' + 
+              '<img src="' + entry.entities.media[0].media_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
+               '"/>' + 
               '</div>' + 
               '<div class="large-6 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
@@ -154,7 +157,6 @@ function fetchTweetAccount(tUserName) {
           } 
         });
         $('#custom').append(mainList);
-      
       }
     }
   });
