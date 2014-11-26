@@ -1,7 +1,7 @@
-Nice Views IL
-=============
+Views 2 remember
+================
 
-Nice ViewsIL is a mobile web app that is built around Instagram API.
+*Views 2 remember* is a mobile web app that is built around Instagram API.
 It's a mobile first web app that bring you *interesting* photos 
 the you didn't follow on your private account.
 
