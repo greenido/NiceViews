@@ -38,20 +38,11 @@ function fetchFeed(curFeed, curSource) {
             }
           }
            
-          //var geoMap = "";
-          // If we have geo location - let's have a nice little map ;)
-          // if ( entry.location &&  entry.location.latitude &&  entry.location.longitude ) {
-          //   geoMap = //'<div class="large-6 large-centered columns">' + 
-          //             '<img border="0" src="https://maps.googleapis.com/maps/api/staticmap?center=' +
-          //             entry.location.latitude + ',' + entry.location.longitude +
-          //             '&amp;zoom=8&amp;size=200x200" class="quimby_search_image">' ;
-          //             //'</div>';
-          // }  
           // Add the image to our page
           mainList += '<div class="large-6 large-centered columns">' +   
                         '<img src="' + entry.images.standard_resolution.url + '" height="640" width="640"/> ' +
                         '</div>' + 
-                        '<div class="large-3 large-centered columns">' + 
+                        '<div class="large-6 large-centered columns">' + 
                         '<a href="' + entry.link + '" target="_blank" class="button">' + 
                         picText + '<br></a> </div>';
           curIndex++;
@@ -111,10 +102,10 @@ function fetchTweets() {
             //console.log("title      : " + entry.text);
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
-            mainList += '<div class="large-6 large-centered columns">' + 
+            mainList +=  '<div class="large-6 large-centered columns">' + 
               '<img src="' + entry.entities.media[0].media_url + '" height="640" width="640"/> ' +
               '</div>' + 
-              '<div class="large-3 large-centered columns">' + 
+              '<div class="large-6 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
               ' </div>';
@@ -155,7 +146,7 @@ function fetchTweetAccount(tUserName) {
             mainList += '<div class="large-6 large-centered columns">' + 
               '<img src="' + entry.entities.media[0].media_url + '" alt="Views App: ' + imgTitle + '"/>' + 
               '</div>' + 
-              '<div class="large-3 large-centered columns">' + 
+              '<div class="large-6 large-centered columns">' + 
               '<a href="' + entry.entities.media[0].expanded_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
               ' </div>';

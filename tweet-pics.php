@@ -15,15 +15,14 @@ try {
   /* Create a TwitterOauth object with consumer/user tokens. */
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_SECRET);
 
-  /* If method is set change API call made. Test is called by default. 
-  $content = $connection->get('account/verify_credentials'); */
+  $users = array("photojojo", "7x5photo", "InspireMyPhotos", "MagnumPhotos", "Photocritic", 
+                "chasejarvis", "NatGeoPhotos", "big_picture", "TelegraphPics");
+  $rand_key = array_rand($users, 1);
+  $curUser = $rand_key[0];
+  $timeData = $connection->get('statuses/user_timeline', array('screen_name' => 'BestEarthPix')); 
+  $timeData2 = $connection->get('statuses/user_timeline', array('screen_name' => $curUser)); 
 
-  /* Some example calls */
-  $timeData = $connection->get('statuses/user_timeline', array('screen_name' => 'BestEarthPix')); //flickr
-  $timeData2 = $connection->get('statuses/user_timeline', array('screen_name' => 'photojojo')); //flickr
-  $arr = array_merge($timeData, $timeData2);
-  // amazingpics
-  //echo "<h2>Time line</h2>";
+  $arr = array_merge($timeData2, $timeData);
   echo(json_encode($arr));
 }
 catch (Exception $exc) {

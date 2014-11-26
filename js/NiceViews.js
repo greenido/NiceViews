@@ -7,19 +7,15 @@
 
 function unixTimeToReadable(unix_timestamp) {
   var date = new Date(unix_timestamp * 1000);
-  
   var hours = date.getHours();
   var minutes = date.getMinutes();
-  if (minutes
-< 10) {
+  if (minutes < 10) {
     minutes = "0" + minutes;
   }
-
   var seconds = date.getSeconds();
   if (seconds < 10) {
     seconds = "0" + seconds;
   }
-  
   var year = date.getFullYear();
   var month = date.getMonth() +1;
   var day = date.getDate();
@@ -42,14 +38,14 @@ function settingTab() {
   tUsers++;
   for (var j = 1; j < tUsers; j++) {
     var tUserName = localStorage.getItem("twitter" + j);
-    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. @greenido" value=' + 
+    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. greenido" value=' + 
        tUserName + '></div>'); 
     fetchTweetAccount(tUserName); 
   };
 
   // Add twitter user button
   $("#addbut").click(function() {
-    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. @greenido" /></div>');
+    $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. greenido" /></div>');
   })
 
   // Cancel button - just show the first panel 
@@ -77,10 +73,7 @@ function settingTab() {
 // Start the party
 //
 $(function() {
-  console.log("-- Starting the party")
-
-    
+  console.log("-- Starting the party --");
   settingTab();
-
 
 });
