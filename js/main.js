@@ -13,7 +13,7 @@ $(document).foundation();
 // Fetch the popular images from insta
 //
 function fetchFeed(curFeed, curSource) {
-    $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
+    $('#mainlist').append("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
     $.ajax({
     url : document.location.protocol + curFeed,
     dataType : 'json',
@@ -23,7 +23,7 @@ function fetchFeed(curFeed, curSource) {
     success  : function (data) {
       // Check if we got something to work on.
       if (data && data.data ) {    
-        $("#spinner").hide();    
+        $("#spinner").remove();    
         var curIndex = 1;
         var mainList = '';
         $.each(data.data, function (i, entry) {
@@ -57,7 +57,7 @@ function fetchFeed(curFeed, curSource) {
           curIndex++;
         });
 
-        //$('#mainlist').html("");
+        $('#mainlist').html("");
         $('#mainlist').append(mainList);
       }
     }
@@ -228,6 +228,6 @@ function fetchAllFeeds() {
 // First fetch of all the feeds to the page
 fetchAllFeeds();
 
-// fetch new data every 120sec
-setInterval(fetchAllFeeds, 120000);
+// fetch new data every 60sec
+setInterval(fetchAllFeeds, 60000);
 
