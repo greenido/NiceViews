@@ -38,9 +38,14 @@ function settingTab() {
   tUsers++;
   for (var j = 1; j < tUsers; j++) {
     var tUserName = localStorage.getItem("twitter" + j);
+    if (tUserName === null || tUserName === undefined) {
+      tUserName = "";
+    }
     $("#t-users").append('<div class="small-8 columns"><input type="text" placeholder="e.g. greenido" value=' + 
        tUserName + '></div>'); 
-    fetchTweetAccount(tUserName); 
+    if (tUserName.length > 2) {
+      fetchTweetAccount(tUserName); 
+    }
   };
 
   // Add twitter user button
@@ -60,7 +65,12 @@ function settingTab() {
     var i=1;
     $("form#setform :input").each(function(){
       var input = $(this); 
-      localStorage.setItem("twitter" + i, input.val());
+      //if (input.val().length > 2) {
+        localStorage.setItem("twitter" + i, input.val());
+      // }
+      // else {
+      //   localStorage.removeItem("twitter" + i);
+      // }
       i++;
     });
     // So will keep track on how many users we are fetching
@@ -75,5 +85,9 @@ function settingTab() {
 $(function() {
   console.log("-- Starting the party --");
   settingTab();
+
+  $('#reload').click(function() {
+      location.reload();
+  });
 
 });

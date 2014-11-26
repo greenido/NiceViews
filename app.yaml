@@ -1,4 +1,4 @@
-application: NiceViews-il
+application: views2remember
 version: 1
 runtime: php
 api_version: 1
@@ -23,6 +23,8 @@ handlers:
 
 - url: /favicon.ico
   script: favicon.ico
+- url: /manifest.json
+  script: manifest.json
 
 - url: /humans.txt
   script: humans.txt
@@ -31,6 +33,11 @@ handlers:
 
 - url: /proxy.php
   script: proxy.php
+
+- url: /tweet-pics.php
+  script: tweet-pics.php
+- url: /tweetsPerAccount.php
+  script: tweetsPerAccount.php
 
 - url: /
   script: index.html
