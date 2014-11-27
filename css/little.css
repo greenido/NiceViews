@@ -1,0 +1,27 @@
+div#pinit {
+  padding-top: 0.5em;
+}
+
+.top-bar .name {
+  height: 45px;
+  margin: 0;
+  font-size: 16px;
+  padding-left: 1.6em;
+}
+
+span.smallfont {
+  font-size: 80%;
+  padding: 0.4em;
+  border-radius: 30%;
+}
+
+h3 {
+  text-align: center;
+}
+
+.style3 {
+  font-size: 70px;
+  color: #E33100;
+  text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #E33100,0 0 30px #E33100,0 0 40px #E33100,0 0 50px #E33100,0 0 75px #E33100;
+  vertical-align:middle;
+}
