@@ -23,6 +23,9 @@ handlers:
 
 - url: /favicon.ico
   script: favicon.ico
+- url: /apple-touch-icon-114x114-precomposed.png
+  script: apple-touch-icon-114x114-precomposed.png
+   
 - url: /manifest.json
   script: manifest.json
 
