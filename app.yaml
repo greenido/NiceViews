@@ -44,3 +44,6 @@ handlers:
 
 - url: /
   script: index.html
+
+- url: /.*
+  script: 404.html
