@@ -37,6 +37,9 @@ handlers:
 - url: /proxy.php
   script: proxy.php
 
+- url: /flickr-pop.php
+  script: flickr-pop.php
+
 - url: /tweet-pics.php
   script: tweet-pics.php
 - url: /tweetsPerAccount.php

@@ -124,6 +124,46 @@ function fetchTweets() {
 }
 
 //
+// Fetch Flickr feeds
+//
+//
+function fetchFlickr(tag) {
+ $.ajax({
+    url : "flickr-pop.php?tag=" + tag,
+//    dataType : 'json',
+    error: function(err) {
+      console.error("Could not fetch flickr. Err: " + err);
+    },
+    success  : function (data) {
+      // Check if we got something to work on.
+      data = JSON.parse(data);
+      if (data) {
+        var mainList = '';
+        $.each(data, function (i, entry) {
+          if (entry.photo_url) {
+            var when = entry.date_taken_nice;
+         
+            //console.log("-----------" + when + "-------------");
+            //console.log("title      : " + entry.text);
+            var imgTitle = entry.title;
+            mainList += '<div class="large-6 large-centered columns">' + 
+              '<img src="' + entry.photo_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
+               '"/>' + 
+              '</div>' + 
+              '<div class="large-6 large-centered columns">' + 
+              '<a href="' + entry.photo_url +
+              '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
+              ' </div>';
+
+          } 
+        });
+        $('#flickr').append(mainList);
+      }
+    }
+  });
+}
+
+//
 // Fetch tweets per account
 //
 function fetchTweetAccount(tUserName) {
@@ -216,6 +256,8 @@ function fetchAllFeeds() {
 
   displayMsgWhileWaiting('#models');
   fetchTweets();
+
+  fetchFlickr("view");
 }
 
 // First fetch of all the feeds to the page
