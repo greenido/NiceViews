@@ -24,6 +24,8 @@ Features
 ========
 * Fetch the user tweets and 'create' a custom profile out of it.
 * Allow integration with FB, yelp, G+ --> to help tune the profile.  
+  * https://developers.google.com/+/api/
+  * https://www.flickr.com/services/api/ and https://www.flickr.com/services/api/flickr.photos.search.html
 
 * APIs 
   * [Instagram API](http://instagram.com/developer/endpoints/)
