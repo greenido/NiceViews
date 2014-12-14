@@ -13,6 +13,8 @@ Live version at: http://views2remember.appspot.com/
 * Use localStorage/IndexedDB to save the last photos + proxy the photos.
 * Add post with explanations at: http://greenido.wordpress.com
 * Add a 'slideshow' mode for kiosks.
+  * https://github.com/dimsemenov/PhotoSwipe
+  * 
 
 ![](http://ido-green.appspot.com/imgs/someone-busy-is-running.png)
 
