@@ -16,3 +16,7 @@ twitteroauth/html.inc
 twitteroauth/images/darker.png
 
 twitteroauth/images/lighter.png
+/nbproject/private/
+*.xml
+
+*.properties
