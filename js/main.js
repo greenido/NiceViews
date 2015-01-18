@@ -41,11 +41,11 @@ function fetchFeed(curFeed, curSource) {
            
           // Add the image to our page
           if (curSource === "Top") {
-            if (picText && picText.length > 50) {
+            if (picText && picText.length > 15) {
               picText = picText.replace("\n", " ");
-              picText = picText.substring(0,50) + "...";
+              picText = picText.substring(0,15) + "...";
             }
-            mainList += '<div class="large-2 columns">' +   
+            mainList += '<div class="large-2 small-4 columns">' +   
               '<img src="' + entry.images.standard_resolution.url +
               '" alt="From http://views2remember.appspot.com/"/>' +
               '<a href="' + entry.link + '" target="_blank" class="button">' + 
