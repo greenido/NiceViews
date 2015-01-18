@@ -48,7 +48,7 @@ function fetchFeed(curFeed, curSource) {
             mainList += '<div class="large-2 small-4 columns">' +   
               '<img src="' + entry.images.standard_resolution.url +
               '" alt="From http://views2remember.appspot.com/"/>' +
-              '<a href="' + entry.link + '" target="_blank" class="button">' + 
+              '<a href="' + entry.link + '" target="_blank" class="button tinywords">' + 
               picText + '</a>' +
               '</div>' ;
              // '<div class="large-2 large-centered columns">' + 
