@@ -45,7 +45,7 @@ function fetchFeed(curFeed, curSource) {
               picText = picText.replace("\n", " ");
               picText = picText.substring(0,15) + "...";
             }
-            mainList += '<div class="large-2 medium-2 small-8 columns">' +   
+            mainList += '<div class="large-2 medium-4 small-8 columns">' +   
               '<img src="' + entry.images.standard_resolution.url +
               '" alt="From http://views2remember.appspot.com/"/>' +
               '<a href="' + entry.link + '" target="_blank" class="button tinywords">' + 
@@ -56,7 +56,7 @@ function fetchFeed(curFeed, curSource) {
               // '</div>';  
           }
           else {
-            mainList += '<div class="large-2 medium-2 small-8 columns">' +   
+            mainList += '<div class="large-2 medium-4 small-8 columns">' +   
               '<img src="' + entry.images.standard_resolution.url + //height="640" width="640"
               '"  alt="From http://views2remember.appspot.com/"/>' +
               '<a href="' + entry.link + '" target="_blank" class="button">' + 
@@ -120,7 +120,7 @@ function fetchTweets() {
             //console.log("title      : " + entry.text);
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
-            mainList +=  '<div class="large-2 medium-2 small-8 columns">' + 
+            mainList +=  '<div class="large-2 medium-4 small-8 columns">' + 
               '<img src="' + entry.entities.media[0].media_url +  //height="640" width="640"
               '"  alt="From http://views2remember.appspot.com/ - ' + imgTitle + '"/> ' +
               '<a href="' + entry.entities.media[0].expanded_url +
@@ -160,7 +160,7 @@ function fetchFlickr(tag) {
             //console.log("-----------" + when + "-------------");
             //console.log("title      : " + entry.text);
             var imgTitle = entry.title;
-            mainList += '<div class="large-2 medium-2 small-8 columns">' + 
+            mainList += '<div class="large-2 medium-4 small-8 columns">' + 
               '<img src="' + entry.photo_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
                '"/>' + '<a href="' + entry.photo_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
