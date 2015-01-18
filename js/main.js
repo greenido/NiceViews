@@ -28,24 +28,43 @@ function fetchFeed(curFeed, curSource) {
         var mainList = '';
         $.each(data.data, function (i, entry) {
           var when = entry.created_time;
+          var picText = "";
           when += " (" + curSource + ")";
           // console.log("-----------" + when + "-------------");
           var buttonHTML = "";
           if (entry.caption && entry.caption.text) {
-            var picText = entry.caption.text;
+            picText = entry.caption.text;
             if (picText.length > 300) {
               picText = picText.substring(0,300) + "...";
             }
           }
            
           // Add the image to our page
-          mainList += '<div class="large-6 large-centered columns">' +   
+          if (curSource === "Top") {
+            if (picText && picText.length > 50) {
+              picText = picText.replace("\n", " ");
+              picText = picText.substring(0,50) + "...";
+            }
+            mainList += '<div class="large-2 columns">' +   
+              '<img src="' + entry.images.standard_resolution.url +
+              '" alt="From http://views2remember.appspot.com/"/>' +
+              '<a href="' + entry.link + '" target="_blank" class="button">' + 
+              picText + '</a>' +
+              '</div>' ;
+             // '<div class="large-2 large-centered columns">' + 
+              
+              // '</div>';  
+          }
+          else {
+            mainList += '<div class="large-6 large-centered columns">' +   
               '<img src="' + entry.images.standard_resolution.url +
               '" height="640" width="640" alt="From http://views2remember.appspot.com/"/>' +
               '</div>' + 
               '<div class="large-6 large-centered columns">' + 
               '<a href="' + entry.link + '" target="_blank" class="button">' + 
-              picText + '<br></a> </div>';
+              picText + '<br></a> </div>';  
+          }
+          
           curIndex++;
         });
 
