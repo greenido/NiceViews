@@ -236,12 +236,16 @@ function fetchPosition(position) {
 function displayMsgWhileWaiting(idElem) {
     var secs = 10;
     var msgArray = ["No great artist ever sees things as they really are. If he did, he would cease to be an artist.",
-        "True friends stab you in the front.",
-        "I have the simplest tastes. I am always satisfied with the best.",
+        "True friends stab you in the front",
+        "I have the simplest tastes. I am always satisfied with the best",
         "Some cause happiness wherever they go; others whenever they go",
         "Children begin by loving their parents; after a time they judge them; rarely, if ever, do they forgive them.",
         "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
-        "Try to be a rainbow in someone's cloud.",
+        "Try to be a rainbow in someone's cloud",
+        "Life isn't about finding yourself. Life is about creating yourself",
+        "Life is really simple, but we insist on making it complicated",
+        "The supreme art of war is to subdue the enemy without fighting",
+        "True compassion is more than flinging a coin to a beggar. It comes to see that an edifice which produces beggars needs restructuring.",
         "Put your heart, mind, and soul into even your smallest acts. This is the secret of success."
     ];
     var randInx = Math.floor(Math.random() * msgArray.length);
