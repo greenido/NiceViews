@@ -2,17 +2,13 @@
 /*
  ======================================================================
  lastRSS 0.9.1
- 
  Simple yet powerfull PHP class to parse RSS files.
- 
  by Vojtech Semecky, webmaster @ webdot . cz
- 
  Latest version, features, manual and examples:
  	http://lastrss.webdot.cz/
 
  ----------------------------------------------------------------------
  LICENSE
-
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License (GPL)
  as published by the Free Software Foundation; either version 2
@@ -29,7 +25,7 @@
 
 /**
 * lastRSS
-* Simple yet powerfull PHP class to parse RSS files.
+* Simple yet powerful PHP class to parse RSS files.
 */
 class lastRSS {
 	// -------------------------------------------------------------------
