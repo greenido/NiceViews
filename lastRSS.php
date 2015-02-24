@@ -6,7 +6,6 @@
  by Vojtech Semecky, webmaster @ webdot . cz
  Latest version, features, manual and examples:
  	http://lastrss.webdot.cz/
-
  ----------------------------------------------------------------------
  LICENSE
  This program is free software; you can redistribute it and/or
