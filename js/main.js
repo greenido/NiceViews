@@ -114,7 +114,7 @@ function fetchTweets() {
           if (entry.entities && entry.entities.media && inx < 20) {
             var when = entry.created_at;
             inx++;
-            console.log("-----------" + when + "-------------" + inx);
+            //console.log("----" + when + "---" + inx);
             //console.log("title      : " + entry.text);
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
@@ -134,6 +134,43 @@ function fetchTweets() {
     }
   });
 }
+
+//
+// Fetch tweets per account
+//
+function fetchTweetAccount(tUserName) {
+ $.ajax({
+    url : "tweetsPerAccount.php?user=" + tUserName,
+    dataType : 'json',
+    error: function(err) {
+      console.error("Could not fetch tweets. Err: " + JSON.stringify(err));
+    },
+    success  : function (data) {
+      // Check if we got something to work on.
+      if (data) {
+        var mainList = '';
+        $.each(data, function (i, entry) {
+          if (entry.entities && entry.entities.media) {
+            var when = entry.created_at;
+         
+            //console.log("-----------" + when + "-------------");
+            //console.log("title      : " + entry.text);
+            when = when.substring(0,10);
+            var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
+            mainList += '<li>' + 
+              '<img src="' + entry.entities.media[0].media_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
+              '"/>' +
+              '<a href="' + entry.entities.media[0].expanded_url +
+              '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' +  
+              '</li>';
+          } 
+        });
+        $('#custom').append(mainList);
+      }
+    }
+  });
+}
+
 
 //
 // Fetch Flickr feeds
