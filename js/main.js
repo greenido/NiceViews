@@ -19,6 +19,7 @@ function fetchFeed(curFeed, curSource) {
     dataType : 'json',
     error: function(err) {
       console.error("Could not fetch feed: " + curFeed + " Err: " + JSON.stringify(err));
+      
     },
     success  : function (data) {
       // Check if we got something to work on.

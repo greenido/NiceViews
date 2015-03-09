@@ -51,7 +51,8 @@ function settingTab() {
   }
 
   if (noCustom) {
-    $("#custom").html(' <i class="fi-photo size-48 style3"></i><h5>Checkout the <i>Settings</i> tab to customize this view!</h5>');
+    $("#custom").html('<img src="img/sad-cat-1.jpg" alt="sad sad cat - due to no photos!" /> <h4>'+
+      ' <i class="fi-photo size-48 style3"></i></h4> <h5>Checkout the <i>Settings</i> tab to customize this view!</h5>');
   }
 
   // Add twitter user button
