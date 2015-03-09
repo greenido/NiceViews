@@ -45,22 +45,19 @@ function fetchFeed(curFeed, curSource) {
               picText = picText.replace("\n", " ");
               picText = picText.substring(0,15) + "...";
             }
-            mainList += '<div class="large-2 medium-4 small-8 columns">' +   
+            mainList += '<li>' +   
               '<img src="' + entry.images.standard_resolution.url +
               '" alt="From http://views2remember.appspot.com/"/>' +
               '<a href="' + entry.link + '" target="_blank" class="button tinywords">' + 
               picText + '</a>' +
-              '</div>' ;
-             // '<div class="large-2 large-centered columns">' + 
-              
-              // '</div>';  
+              '</li>' ;
           }
           else {
-            mainList += '<div class="large-2 medium-4 small-8 columns">' +   
+            mainList += '<li>' +   
               '<img src="' + entry.images.standard_resolution.url + //height="640" width="640"
               '"  alt="From http://views2remember.appspot.com/"/>' +
               '<a href="' + entry.link + '" target="_blank" class="button">' + 
-              picText + '</a> </div>';  
+              picText + '</a> </li>';  
           }
           
           curIndex++;
@@ -112,20 +109,21 @@ function fetchTweets() {
       // Check if we got something to work on.
       if (data) {
         var mainList = '';
+        var inx = 0;
         $.each(data, function (i, entry) {
-          if (entry.entities && entry.entities.media) {
+          if (entry.entities && entry.entities.media && inx < 20) {
             var when = entry.created_at;
-         
-            //console.log("-----------" + when + "-------------");
+            inx++;
+            console.log("-----------" + when + "-------------" + inx);
             //console.log("title      : " + entry.text);
             when = when.substring(0,10);
             var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
-            mainList +=  '<div class="large-2 medium-4 small-8 columns">' + 
+            mainList +=  '<li>' +  //'<div class="large-2 medium-4 small-8 columns tinywords">' + 
               '<img src="' + entry.entities.media[0].media_url +  //height="640" width="640"
               '"  alt="From http://views2remember.appspot.com/ - ' + imgTitle + '"/> ' +
               '<a href="' + entry.entities.media[0].expanded_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
-              '</div>' ;
+              '</li>' ;
           } 
         });
         clearTimeout(timer);
@@ -160,11 +158,11 @@ function fetchFlickr(tag) {
             //console.log("-----------" + when + "-------------");
             //console.log("title      : " + entry.text);
             var imgTitle = entry.title;
-            mainList += '<div class="large-2 medium-4 small-8 columns">' + 
+            mainList += '<li>' + 
               '<img src="' + entry.photo_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
                '"/>' + '<a href="' + entry.photo_url +
               '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
-              '</div>';
+              '</li>';
           } 
         });
         $('#flickr').append(mainList);
@@ -173,44 +171,6 @@ function fetchFlickr(tag) {
   });
 }
 
-//
-// Fetch tweets per account
-//
-function fetchTweetAccount(tUserName) {
- $.ajax({
-    url : "tweetsPerAccount.php?user=" + tUserName,
-    dataType : 'json',
-    error: function(err) {
-      console.error("Could not fetch tweets. Err: " + JSON.stringify(err));
-    },
-    success  : function (data) {
-      // Check if we got something to work on.
-      if (data) {
-        var mainList = '';
-        $.each(data, function (i, entry) {
-          if (entry.entities && entry.entities.media) {
-            var when = entry.created_at;
-         
-            //console.log("-----------" + when + "-------------");
-            //console.log("title      : " + entry.text);
-            when = when.substring(0,10);
-            var imgTitle = entry.text.substring(0, entry.text.indexOf("http://t"));
-            mainList += '<div class="large-6 large-centered columns">' + 
-              '<img src="' + entry.entities.media[0].media_url + '" alt="From http://views2remember.appspot.com/ - ' + imgTitle +
-               '"/>' + 
-              '</div>' + 
-              '<div class="large-6 large-centered columns">' + 
-              '<a href="' + entry.entities.media[0].expanded_url +
-              '" target="_blank" class="button">'+ imgTitle + '<br>(' + when + ')</a>' + 
-              ' </div>';
-
-          } 
-        });
-        $('#custom').append(mainList);
-      }
-    }
-  });
-}
 
 //
 function picAround() {
