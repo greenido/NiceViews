@@ -3,6 +3,7 @@
 //
 // @author: Ido Green | @greenido
 // Date: Nov 2014
+// Update: 10/3/2015 - with new (better) layout for the images
 //
 
 function unixTimeToReadable(unix_timestamp) {
