@@ -15,5 +15,4 @@
   Components: Modernizr, jQuery
   Software:
   and good beers.
-
 * https://developers.google.com/appengine/docs/python/config/appconfig
