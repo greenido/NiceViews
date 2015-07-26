@@ -33,3 +33,6 @@ Features
   * [Twitter API](https://dev.twitter.com/)
 
 ####Please feel free to fork or open issues.
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-65622529-1/NiceViews/main)](https://github.com/igrigorik/ga-beacon)
